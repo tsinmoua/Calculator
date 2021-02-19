@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, makeStyles, Grid, Typography } from '@material-ui/core'
 
-const Buttons = ({ input }) => {
+const Buttons = ({ input, onClick }) => {
 
     const useStyles = makeStyles({
         box: {
@@ -57,32 +57,32 @@ const Buttons = ({ input }) => {
                     <Typography variant='h3'>{input}</Typography>
                 </Grid>
                 <Grid item>
-                    <Button variant='contained' className={classes.numbers}>/</Button>
-                    <Button variant='contained' className={classes.numbers}>*</Button>
-                    <Button variant='contained' className={classes.numbers}>-</Button>
-                    <Button variant='contained' className={classes.numbers}>C</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='/'>/</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='*'>*</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='-'>-</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='C'>C</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant='contained' className={classes.numbers}>7</Button>
-                    <Button variant='contained' className={classes.numbers}>8</Button>
-                    <Button variant='contained' className={classes.numbers}>9</Button>
-                    <Button variant='contained' className={classes.numbers}>+</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='7' value='7'>7</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='8'>8</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='9'>9</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='+'>+</Button>
                 </Grid>
                 <Grid item style={{ marginTop: '-10rem' }}>
-                    <Button variant='contained' className={classes.numbers}>4</Button>
-                    <Button variant='contained' className={classes.numbers}>5</Button>
-                    <Button variant='contained' className={classes.numbers}>6</Button>
-                    <Button variant='contained' className={classes.equal}>=</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='4'>4</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='5'>5</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='6'>6</Button>
+                    <Button variant='contained' className={classes.equal} onClick={onClick} value='='>=</Button>
                 </Grid>
                 <Grid item className={classes.bottom}>
                     <Grid item>
-                        <Button variant='contained' className={classes.numbers}>1</Button>
-                        <Button variant='contained' className={classes.numbers}>2</Button>
-                        <Button variant='contained' className={classes.numbers}>3</Button>
+                        <Button variant='contained' className={classes.numbers} onClick={onClick} value='1'>1</Button>
+                        <Button variant='contained' className={classes.numbers} onClick={onClick} value='2'>2</Button>
+                        <Button variant='contained' className={classes.numbers} onClick={onClick} value='3'>3</Button>
                     </Grid>
                     <Grid item>
-                        <Button variant='contained' className={classes.zero}>0</Button>
-                        <Button variant='contained' className={classes.numbers}>.</Button>
+                        <Button variant='contained' className={classes.zero} onClick={onClick} value='0'>0</Button>
+                        <Button variant='contained' className={classes.numbers} onClick={onClick} value='.'>.</Button>
                     </Grid>
                 </Grid>
             </Grid>
