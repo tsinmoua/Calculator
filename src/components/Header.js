@@ -1,10 +1,23 @@
 import React from "react"
-import { Typography } from "@material-ui/core"
+import { makeStyles, Typography } from "@material-ui/core"
 
 const Header = ({ title }) => {
+
+    const useStyles = makeStyles({
+        title: {
+            padding: '5rem 0'
+        }
+    })
+
+    const classes = useStyles();
+
     return (
         <div>
-            <Typography variant='h1'>
+            <Typography
+                variant='h1'
+                align='center'
+                className={classes.title}
+            >
                 {title}
             </Typography>
         </div>
