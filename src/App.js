@@ -1,5 +1,5 @@
 import React from 'react'
-import Buttons from './components/Buttons'
+import NumberPad from './components/NumberPad'
 import Header from './components/Header'
 import './app.css'
 import { Grid, makeStyles } from '@material-ui/core';
@@ -22,7 +22,7 @@ function App() {
         alignContent='center'
         justify='center'
       >
-        <Buttons />
+        <NumberPad />
       </Grid>
     </React.Fragment>
   );
