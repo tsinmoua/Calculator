@@ -5,7 +5,9 @@ const Header = ({ title }) => {
 
     const useStyles = makeStyles({
         title: {
-            padding: '5rem 0'
+            padding: '5rem 0',
+            fontWeight: 'bolder',
+            color: 'navy'
         }
     })
 

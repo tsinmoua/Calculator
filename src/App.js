@@ -1,21 +1,19 @@
 import React from 'react'
 import Buttons from './components/Buttons'
 import Header from './components/Header'
-
+import './app.css'
 import { Grid, makeStyles } from '@material-ui/core';
 
 function App() {
 
   const useStyles = makeStyles({
-    numbers: {
-      marginLeft: 'auto'
-    }
+
   })
 
   const classes = useStyles();
 
   return (
-    <div>
+    <React.Fragment>
       <Header
         title="Calculator"
       />
@@ -25,10 +23,8 @@ function App() {
         justify='center'
       >
         <Buttons />
-        <Buttons />
-        <Buttons />
       </Grid>
-    </div>
+    </React.Fragment>
   );
 }
 
