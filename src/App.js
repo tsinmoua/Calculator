@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import NumberPad from './components/NumberPad'
 import Header from './components/Header'
+import History from './components/History'
 import './app.css'
 import { Grid } from '@material-ui/core';
 
@@ -56,19 +57,28 @@ function App() {
       case '=':
         switch (operator) {
           case '+':
-            setHistory([...history, (`${input} + ${firstNumber} = ${firstNumber + parseFloat(input)}`)])
+            setHistory([...history, (`${firstNumber} + ${input}= ${firstNumber + parseFloat(input)}`)])
             setInput('')
             setFirstNumber('')
             setOperator('')
             break;
           case '-':
-            setInput(firstNumber - parseFloat(input))
+            setHistory([...history, (`${firstNumber} - ${input}= ${firstNumber - parseFloat(input)}`)])
+            setInput('')
+            setFirstNumber('')
+            setOperator('')
             break;
           case '*':
-            setInput(firstNumber * parseFloat(input))
+            setHistory([...history, (`${firstNumber} * ${input}= ${firstNumber * parseFloat(input)}`)])
+            setInput('')
+            setFirstNumber('')
+            setOperator('')
             break;
           case '/':
-            setInput(firstNumber / parseFloat(input))
+            setHistory([...history, (`${firstNumber} / ${input}= ${firstNumber / parseFloat(input)}`)])
+            setInput('')
+            setFirstNumber('')
+            setOperator('')
             break;
           default:
             break;
@@ -78,13 +88,19 @@ function App() {
         break;
     }
 
-
   }
+
+  let list = [];
+  for (let i = 0; i < 10; i++) {
+    list.splice(0, 0, history[i])
+  }
+
   console.log('------------------------------')
   console.log('input: ', input)
   console.log('first number: ', firstNumber)
   console.log('operator:', operator)
   console.log('history: ', history)
+  console.log('list: ', list)
 
   return (
     <React.Fragment>
@@ -96,10 +112,16 @@ function App() {
         alignContent='center'
         justify='center'
       >
-        <NumberPad
-          input={input}
-          onClick={handleButtonClick}
-        />
+        <Grid item>
+          <NumberPad
+            input={input}
+            onClick={handleButtonClick}
+          />
+        </Grid>
+
+        <Grid item>
+          <History list={list} />
+        </Grid>
       </Grid>
     </React.Fragment>
   );
