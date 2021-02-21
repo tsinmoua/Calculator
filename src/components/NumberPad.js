@@ -63,7 +63,7 @@ const Buttons = ({ input, onClick }) => {
                     <Button variant='contained' className={classes.numbers} onClick={onClick} value='C'>C</Button>
                 </Grid>
                 <Grid item>
-                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='7' value='7'>7</Button>
+                    <Button variant='contained' className={classes.numbers} onClick={onClick} value='7'>7</Button>
                     <Button variant='contained' className={classes.numbers} onClick={onClick} value='8'>8</Button>
                     <Button variant='contained' className={classes.numbers} onClick={onClick} value='9'>9</Button>
                     <Button variant='contained' className={classes.numbers} onClick={onClick} value='+'>+</Button>
