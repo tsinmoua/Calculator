@@ -85,12 +85,12 @@ function App() {
   }
 
   let list = []
-  for (let i = 0; i < 10; i++) {
-    if (list.length === 0) {
-      list.push(history[i])
-    } else {
-      list.splice(0, 0, history[i])
-    }
+  for (let i = history.length; i > -1; i--) {
+    // if (list.length === 0) {
+    //   list.splice(0, 0, history[i])
+    // } else {
+    list.push(history[i])
+    // }
   }
 
   console.log('------------------------------')
