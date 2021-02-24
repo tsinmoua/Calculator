@@ -3,7 +3,7 @@ import NumberPad from './components/NumberPad'
 import Header from './components/Header'
 import History from './components/History'
 import './app.css'
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 function App() {
 
@@ -11,95 +11,94 @@ function App() {
   const [firstNumber, setFirstNumber] = useState(0)
   const [operator, setOperator] = useState('')
   const [history, setHistory] = useState([])
+  const [equation, setEquation] = useState([])
 
 
   const handleButtonClick = (e) => {
     let val = e.currentTarget.value
 
-    switch (val) {
-      case 'C':
-        setInput('')
-        setFirstNumber('')
-        setOperator('')
-        break;
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        setInput(input + val);
+    if (val === 'C') {
+      clear()
+    } else if (val >= 0 && val <= 9) {
+      setInput(input + val)
+      setEquation(equation + val)
+    } else if (val === '+') {
+      result('+')
+    } else if (val === '-') {
+      result('-')
+    } else if (val === '*') {
+      result('*')
+    } else if (val === '/') {
+      result('/')
+    } else if (val === '=') {
+      evaluate(operator)
+    }
+  }
+
+  const clear = () => {
+    setInput('')
+    setFirstNumber(0)
+    setOperator('')
+    setEquation([])
+  }
+
+  const result = (operatorSymbol) => {
+    if (operator === '') {
+      setFirstNumber(parseFloat(input))
+    } else if (operator === '+') {
+      setFirstNumber(firstNumber + parseFloat(input))
+    } else if (operator === '-') {
+      setFirstNumber(firstNumber - parseFloat(input))
+    } else if (operator === '*') {
+      setFirstNumber(firstNumber * parseFloat(input))
+    } else if (operator === '/') {
+      setFirstNumber(firstNumber / parseFloat(input))
+    }
+
+    setInput('')
+    setOperator(operatorSymbol)
+    setEquation(equation + operatorSymbol);
+  }
+
+  const evaluate = (operator) => {
+    clear()
+    setEquation('')
+    switch (operator) {
+      case '':
+        setHistory([...history, (`${equation} = ${firstNumber + parseFloat(input)}`)])
         break;
       case '+':
-        setFirstNumber(parseFloat(input))
-        setOperator('+')
-        setInput('')
+        setHistory([...history, (`${equation} = ${firstNumber + parseFloat(input)}`)])
         break;
       case '-':
-        setFirstNumber(parseFloat(input))
-        setOperator('-')
-        setInput('')
+        setHistory([...history, (`${equation} = ${firstNumber - parseFloat(input)}`)])
         break;
       case '*':
-        setFirstNumber(parseFloat(input))
-        setOperator('*')
-        setInput('')
+        setHistory([...history, (`${equation} = ${firstNumber * parseFloat(input)}`)])
         break;
       case '/':
-        setFirstNumber(parseFloat(input))
-        setOperator('/')
-        setInput('')
-        break;
-      case '=':
-        switch (operator) {
-          case '+':
-            setHistory([...history, (`${firstNumber} + ${input}= ${firstNumber + parseFloat(input)}`)])
-            setInput('')
-            setFirstNumber('')
-            setOperator('')
-            break;
-          case '-':
-            setHistory([...history, (`${firstNumber} - ${input}= ${firstNumber - parseFloat(input)}`)])
-            setInput('')
-            setFirstNumber('')
-            setOperator('')
-            break;
-          case '*':
-            setHistory([...history, (`${firstNumber} * ${input}= ${firstNumber * parseFloat(input)}`)])
-            setInput('')
-            setFirstNumber('')
-            setOperator('')
-            break;
-          case '/':
-            setHistory([...history, (`${firstNumber} / ${input}= ${firstNumber / parseFloat(input)}`)])
-            setInput('')
-            setFirstNumber('')
-            setOperator('')
-            break;
-          default:
-            break;
-        }
+        setHistory([...history, (`${equation} = ${firstNumber / parseFloat(input)}`)])
         break;
       default:
         break;
     }
-
   }
 
-  let list = [];
+  let list = []
   for (let i = 0; i < 10; i++) {
-    list.splice(0, 0, history[i])
+    if (list.length === 0) {
+      list.push(history[i])
+    } else {
+      list.splice(0, 0, history[i])
+    }
   }
 
   console.log('------------------------------')
-  console.log('input: ', input)
   console.log('first number: ', firstNumber)
   console.log('operator:', operator)
+  console.log('input: ', input)
   console.log('history: ', history)
+  console.log('equation: ', equation)
   console.log('list: ', list)
 
   return (
@@ -115,11 +114,15 @@ function App() {
         <Grid item>
           <NumberPad
             input={input}
+            equation={equation}
             onClick={handleButtonClick}
           />
         </Grid>
 
         <Grid item>
+          <Typography variant='h2'>
+            History
+          </Typography>
           <History list={list} />
         </Grid>
       </Grid>

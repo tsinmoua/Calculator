@@ -1,12 +1,19 @@
 import React from "react"
 import { Button, makeStyles, Grid, Typography } from '@material-ui/core'
 
-const Buttons = ({ input, onClick }) => {
+const Buttons = ({ input, onClick, equation }) => {
 
     const useStyles = makeStyles({
         box: {
             width: '20rem',
             height: '5rem',
+            color: 'white',
+            backgroundColor: 'black',
+            paddingLeft: '1rem'
+        },
+        secondbox: {
+            width: '20rem',
+            height: '2rem',
             color: 'white',
             backgroundColor: 'black',
             paddingLeft: '1rem'
@@ -55,6 +62,9 @@ const Buttons = ({ input, onClick }) => {
             <Grid container direction='column' alignItems='center'>
                 <Grid container alignItems='center' className={classes.box}>
                     <Typography variant='h3'>{input}</Typography>
+                </Grid>
+                <Grid container alignItems='center' className={classes.secondbox}>
+                    <Typography variant='h6'>{equation}</Typography>
                 </Grid>
                 <Grid item>
                     <Button variant='contained' className={classes.numbers} onClick={onClick} value='/'>/</Button>
